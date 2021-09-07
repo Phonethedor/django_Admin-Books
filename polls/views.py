@@ -115,3 +115,12 @@ def getP(request):
         'lista_libros' : libros
     }
     return render(request, 'polls/editP.html', context)
+
+
+def updP(request):
+    publicador = Publicador.objects.get(id=request.POST['id'])
+    publicador.nombre = request.POST['nombre']
+    publicador.libros.clear()
+    lib = request.POST.getlist('libros')
+    publicador.libros.set(lib)
+    return redirect("libros_publicadores")

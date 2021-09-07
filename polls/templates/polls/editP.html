@@ -5,12 +5,16 @@
     <form method="POST" action="updP">
         {% csrf_token %}
         <input type="hidden" name="id" value="{{ publicador.id }}">
-        <label for="titulo">Nombre: </table>
+        <label for="nombre">Nombre: </table>
         <input type="text" name="nombre" value="{{ publicador.nombre }}"><br>
         <label for="libros">Libros: </table><br>
             <select name="libros" required multiple>
                 {% for libro in lista_libros %}
-                    <option value="{{ libro.id }}">{{ libro.titulo }}</option>
+                    {% if libro in publicador.libros.all %}
+                        <option value="{{ libro.id }}" selected>{{ libro.titulo }}</option>
+                    {% else %}
+                        <option value="{{ libro.id }}">{{ libro.titulo }}</option>
+                    {% endif %}
                 {% endfor %}
             </select><br><br>
         <input type="submit" value="Actualizar datos">
