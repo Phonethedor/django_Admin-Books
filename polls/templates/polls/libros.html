@@ -2,8 +2,8 @@
 
 {% block  content %}
 <h1>Libros</h1>
-<table class="table">
-        <thead>
+<table  class="table table-striped">
+        <thead class="thead-dark">
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Titulo</th>
@@ -23,12 +23,12 @@
                     <form method="POST" action="getB">
                         {% csrf_token %}
                         <input type="hidden" name="id" value="{{ libro.id }}">
-                        <button type="submit">Editar</button>
+                        <button class="btn btn-primary my-1" type="submit">Editar</button>
                     </form>
                     <form method="POST" action="delB">
                         {% csrf_token %}
                         <input type="hidden" name="id" value="{{ libro.id }}">
-                        <button type="submit">eliminar</button>
+                        <button class="btn btn-danger" type="submit">Eliminar</button>
                     </form>
                 </td>
                 <td></td>
@@ -38,12 +38,12 @@
         <form action='createB' method='POST'>
                 {% csrf_token %}
                 <p>Titulo: <input type="text" name="titulo" required=""></p>
-                <input type="submit" value="Añadir">
+                <input class="btn btn-primary my-1" type="submit" value="Añadir">
         </form>
     </table>
 <h1>Publicadores</h1>
-<table class="table">
-        <thead>
+<table  class="table table-striped">
+        <thead class="thead-dark">
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Nombre</th>
@@ -69,17 +69,17 @@
                     <form method="POST" action="getP">
                         {% csrf_token %}
                         <input type="hidden" name="id" value="{{ publicador.id }}">
-                        <button type="submit">Editar</button>
+                        <button class="btn btn-primary my-1" type="submit">Editar</button>
                     </form>
                     <form method="POST" action="delP">
                         {% csrf_token %}
                         <input type="hidden" name="id" value="{{ publicador.id }}">
-                        <button type="submit">eliminar</button>
+                        <button class="btn btn-danger" type="submit">Eliminar</button>
                     </form>
                 </td>
             </tr>
         {% endfor %}
-        <a href="addP" type="BUTTON">Agregar</a>
+        <a href="addP" type="BUTTON" class="btn btn-primary my-1">Agregar</a>
         </tbody>
     </table>
 {% endblock %}

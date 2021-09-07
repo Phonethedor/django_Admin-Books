@@ -68,8 +68,10 @@ def createB(request):
 
 def getB(request):
     libro = Libro.objects.get(id=request.POST['id'])
+    publicador=Publicador.objects.all()
     context = {
-        'libro': libro
+        'libro': libro,
+        'publicadores': publicador,
     }
     return render(request, 'polls/editlibros.html', context)
 
@@ -77,7 +79,11 @@ def getB(request):
 def updB(request):
     libro = Libro.objects.get(id=request.POST['id'])
     libro.titulo = request.POST['titulo']
+    libro.publicador.clear()
+    publicadores=request.POST.getlist('publicadores')
+    libro.publicador.set(publicadores)
     libro.save()
+    print(publicadores)
     return redirect("libros_publicadores")
 
 
@@ -116,3 +122,12 @@ def getP(request):
     }
     return render(request, 'polls/editP.html', context)
 
+
+def updP(request):
+    publicador = Publicador.objects.get(id=request.POST['id'])
+    publicador.nombre = request.POST['nombre']
+    publicador.libros.clear()
+    lib = request.POST.getlist('libros')
+    publicador.libros.set(lib)
+    publicador.save()
+    return redirect("libros_publicadores")

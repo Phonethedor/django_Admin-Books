@@ -16,6 +16,6 @@ urlpatterns = [
     path('addP', views.addP, name='addP'),
     path('createP', views.createP, name='createP'),
     path('getP', views.getP, name='getP'),
-    #path('updP', views.updP, name='updP'),
+    path('updP', views.updP, name='updP'),
     path('delP', views.delP, name='delP'),
 ]

@@ -2,15 +2,20 @@
 
 {% block  content %}
 <h1>Editar Publicador</h1>
-    <form method="POST" action="updP">
+    <form class="form-group" method="POST" action="updP">
         {% csrf_token %}
         <input type="hidden" name="id" value="{{ publicador.id }}">
-        <label for="titulo">Nombre: </table>
+        <label for="nombre">Nombre: </table>
         <input type="text" name="nombre" value="{{ publicador.nombre }}"><br>
         <label for="libros">Libros: </table><br>
-            <select name="libros" required multiple>
+            <select multiple class="form-control" name="libros" required multiple>
+            {% comment %} select devuelve la lista de options.value seleccionados {% endcomment %}
                 {% for libro in lista_libros %}
-                    <option value="{{ libro.id }}">{{ libro.titulo }}</option>
+                    {% if libro in publicador.libros.all %}
+                        <option value="{{ libro.id }}" selected>{{ libro.titulo }}</option>
+                    {% else %}
+                        <option value="{{ libro.id }}">{{ libro.titulo }}</option>
+                    {% endif %}
                 {% endfor %}
             </select><br><br>
         <input type="submit" value="Actualizar datos">
