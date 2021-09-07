@@ -10,5 +10,7 @@ urlpatterns = [
     path('docs', views.documentos, name='documentos'),
     path('libros_publicadores', views.libros_publicadores, name='libros_publicadores'),
     path('addB', views.addB, name='addB'),
-    path('editB', views.libros_publicadores, name='editB'),
+    path('getB', views.getB, name='getB'),
+    path('updB', views.updB, name='updB'),
+    path('delB', views.delB, name='delB'),
 ]

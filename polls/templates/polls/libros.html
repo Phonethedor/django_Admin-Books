@@ -9,6 +9,7 @@
                 <th scope="col">Titulo</th>
                 <th scope="col">Fecha de creacion</th>
                 <th scope="col">Fecha de actualizacion</th>
+                <th scope="col">Accion</th>
             </tr>
         </thead>
         {% for libro in lista_libros%}
@@ -18,6 +19,19 @@
                 <td>{{libro.titulo}}</td>
                 <td>{{libro.created_at}}</td>
                 <td>{{libro.updated_at}}</td>
+                <td>
+                    <form method="POST" action="getB">
+                        {% csrf_token %}
+                        <input type="hidden" name="id" value="{{ libro.id }}">
+                        <button type="submit">Editar</button>
+                    </form>
+                    <form method="POST" action="delB">
+                        {% csrf_token %}
+                        <input type="hidden" name="id" value="{{ libro.id }}">
+                        <button type="submit">eliminar</button>
+                    </form>
+                </td>
+                <td></td>
             </tr>
         {% endfor %}
         </tbody>

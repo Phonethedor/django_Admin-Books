@@ -59,7 +59,28 @@ def libros_publicadores(request):
 
     return render(request, 'polls/libros.html', context)
 
+
 def addB(request):
     if request.POST['titulo']:
         Libro.objects.create(titulo=request.POST['titulo'])
+    return redirect("libros_publicadores")
+
+
+def getB(request):
+    libro = Libro.objects.get(id=request.POST['id'])
+    context = {
+        'libro': libro
+    }
+    return render(request, 'polls/editlibros.html', context)
+
+
+def updB(request):
+    libro = Libro.objects.get(id=request.POST['id'])
+    libro.titulo = request.POST['titulo']
+    libro.save()
+    return redirect("libros_publicadores")
+
+
+def delB(request):
+    Libro.objects.get(id=request.POST['id']).delete()
     return redirect("libros_publicadores")
