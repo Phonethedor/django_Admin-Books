@@ -60,7 +60,7 @@ def libros_publicadores(request):
     return render(request, 'polls/libros.html', context)
 
 
-def addB(request):
+def createB(request):
     if request.POST['titulo']:
         Libro.objects.create(titulo=request.POST['titulo'])
     return redirect("libros_publicadores")
@@ -84,3 +84,34 @@ def updB(request):
 def delB(request):
     Libro.objects.get(id=request.POST['id']).delete()
     return redirect("libros_publicadores")
+
+
+def delP(request):
+    Publicador.objects.get(id=request.POST['id']).delete()
+    return redirect("libros_publicadores")
+
+
+def addP(request):
+    libros = Libro.objects.all()
+    context = {
+        'lista_libros': libros
+    }
+    return render(request, 'polls/addP.html', context)
+
+
+def createP(request):
+    if request.POST['nombre']:
+        Publicador.objects.create(nombre=request.POST['nombre'])
+        lib = request.POST.getlist('libros')
+        Publicador.objects.last().libros.set(lib)
+    return redirect("libros_publicadores")
+
+
+def getP(request):
+    publicador = Publicador.objects.get(id=request.POST['id'])
+    libros = Libro.objects.all()
+    context = {
+        'publicador': publicador,
+        'lista_libros' : libros
+    }
+    return render(request, 'polls/editP.html', context)

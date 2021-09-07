@@ -12,7 +12,7 @@
                 <th scope="col">Accion</th>
             </tr>
         </thead>
-        {% for libro in lista_libros%}
+        {% for libro in lista_libros %}
         <tbody>
             <tr>
                 <th scope="row">{{libro.id}}</th>
@@ -35,9 +35,9 @@
             </tr>
         {% endfor %}
         </tbody>
-        <form action='addB' method='POST'>
+        <form action='createB' method='POST'>
                 {% csrf_token %}
-                <p>Titulo: <input type="text" name="titulo"></p>
+                <p>Titulo: <input type="text" name="titulo" required=""></p>
                 <input type="submit" value="Añadir">
         </form>
     </table>
@@ -50,6 +50,7 @@
                 <th scope="col">Libros</th>
                 <th scope="col">fecha de creacion</th>
                 <th scope="col">Fecha de actualizacion</th>
+                <th scope="col">Accion</th>
             </tr>
         </thead>
         {% for publicador in lista_publicadores%}
@@ -64,8 +65,21 @@
                 </td>
                 <td>{{publicador.created_at}}</td>
                 <td>{{publicador.updated_at}}</td>
+                <td>
+                    <form method="POST" action="getP">
+                        {% csrf_token %}
+                        <input type="hidden" name="id" value="{{ publicador.id }}">
+                        <button type="submit">Editar</button>
+                    </form>
+                    <form method="POST" action="delP">
+                        {% csrf_token %}
+                        <input type="hidden" name="id" value="{{ publicador.id }}">
+                        <button type="submit">eliminar</button>
+                    </form>
+                </td>
             </tr>
         {% endfor %}
+        <a href="addP" type="BUTTON">Agregar</a>
         </tbody>
     </table>
 {% endblock %}
