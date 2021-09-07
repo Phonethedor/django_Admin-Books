@@ -126,6 +126,7 @@ def getP(request):
 def updP(request):
     publicador = Publicador.objects.get(id=request.POST['id'])
     publicador.nombre = request.POST['nombre']
+    publicador.save()
     publicador.libros.clear()
     lib = request.POST.getlist('libros')
     publicador.libros.set(lib)
